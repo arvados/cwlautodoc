@@ -19,12 +19,27 @@ def extract_labels(process: cwl.Process):
     if process.doc:
        print('##### ' + process.doc + '\n')
 
-def extract_inputs(workflow: cwl.Workflow):
+def extract_step_inputs_outputs(process: cwl.Process):
+    if process.in_:
+       print('### Inputs \n')
+       for inps in process.in_:
+            inputname = os.path.basename(inps.id)
+            print(inputname + '\n')
+
+
+def extract_inputs_outputs(workflow: cwl.Workflow):
     if workflow.inputs:
        print('### Inputs \n')
        for inps in workflow.inputs: 
             inputname = inps.id.split('#')[-1]
             print(inputname + '\n')
+
+    if workflow.outputs:
+       print('### Outputs \n')
+       for outs in workflow.outputs:
+            outputname = outs.id.split('#')[-1]
+            print(outputname + '\n')
+
 
 def extract_software_reqs(process: cwl.Process):
     if process.requirements:
@@ -60,12 +75,14 @@ def traverse_workflow(workflow: cwl.Workflow):
     workflowname = os.path.basename(workflow.id)
     print('# Workflow: ' + workflowname + '\n')
     extract_labels(workflow)
-    extract_inputs(workflow)
+    extract_inputs_outputs(workflow)
     print('## Steps: \n')
     for step in workflow.steps:
          stepname = step.id.split('#')[-1]
          print('### Step: ' + stepname + '\n')
          extract_labels(step)
+         extract_step_inputs_outputs(step)
+#         print(vars(step))
 #        extract_software_packages(step)
 #        traverse(get_process_from_step(step))
 

@@ -8,6 +8,10 @@
 
 input_file
 
+### Outputs 
+
+output_file
+
 ## Steps: 
 
 ### Step: md5sum
@@ -15,4 +19,8 @@ input_file
 #### Main workhorse to calculate the md5sum
 
 ##### Longer doc statement on what the step does
+
+### Inputs 
+
+input_file
 
