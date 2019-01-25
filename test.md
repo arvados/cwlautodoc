@@ -4,6 +4,10 @@
 
 ##### Longer label to describe how what this workflow does
 
+### Inputs 
+
+input_file
+
 ## Steps: 
 
 ### Step: md5sum
