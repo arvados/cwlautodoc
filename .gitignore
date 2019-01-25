@@ -1,8 +1,8 @@
 # Environment 
 /venv3/*
 /venv3.6/*
-
+/.eggs/*
 
 # CWL utils
-/cwl-util/*
+/cwl-utils/*
 
