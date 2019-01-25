@@ -1,4 +1,8 @@
-./venv3
-./venv3.6
-./cwl-util
+# Environment 
+./venv3/*
+./venv3.6/*
+
+
+# CWL utils
+./cwl-util/*
 
