@@ -59,7 +59,7 @@ def traverse_workflow(workflow: cwl.Workflow):
     for step in workflow.steps:
 #         print(vars(step))
          stepname = step.id.split('#')[-1]
-         print('Step ID: ' + stepname + '\n')
+         print('### Step: ' + stepname + '\n')
          extract_labels(step)
 #        extract_software_packages(step)
 #        traverse(get_process_from_step(step))

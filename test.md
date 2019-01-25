@@ -6,7 +6,7 @@ Doc: Longer label to describe how what this workflow does
 
 ## Steps: 
 
-Step ID: md5sum
+### Step: md5sum
 
 Label: Main workhorse to calculate the md5sum
 
