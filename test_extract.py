@@ -15,9 +15,9 @@ def extract_software_packages(process: cwl.Process):
 
 def extract_labels(process: cwl.Process):
     if process.label:
-       print('Label: '+ process.label+ '\n')
+       print('#### '+ process.label+ '\n')
     if process.doc:
-       print('Doc: ' + process.doc + '\n')
+       print('#### ' + process.doc + '\n')
 
 def extract_software_reqs(process: cwl.Process):
     if process.requirements:
