@@ -2,7 +2,7 @@
 
 #### Calculates an md5sum
 
-#### Longer label to describe how what this workflow does
+##### Longer label to describe how what this workflow does
 
 ## Steps: 
 
@@ -10,5 +10,5 @@
 
 #### Main workhorse to calculate the md5sum
 
-#### Longer doc statement on what the step does
+##### Longer doc statement on what the step does
 
