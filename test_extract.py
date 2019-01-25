@@ -2,6 +2,7 @@
 import sys
 import cwl_utils.parser_v1_0 as cwl
 import inspect
+import os
 
 def main():
     top = cwl.load_document(sys.argv[1])
@@ -14,7 +15,7 @@ def extract_software_packages(process: cwl.Process):
 
 def extract_labels(process: cwl.Process):
     if process.label:
-       print('Label: '+ process.label)
+       print('Label: '+ process.label+ '\n')
     if process.doc:
        print('Doc: ' + process.doc)
 
@@ -50,11 +51,15 @@ def get_process_from_step(step: cwl.WorkflowStep):
 
 def traverse_workflow(workflow: cwl.Workflow):
     print('Workflow:')
+    workflowname = os.path.basename(workflow.id)
+    print('Workflow id: ' + workflowname)
 #    print(vars(workflow))
     extract_labels(workflow)
     print('Steps:')
     for step in workflow.steps:
 #         print(vars(step))
+         stepname = step.id.split('#')[-1]
+         print('Step ID: ' + stepname)
          extract_labels(step)
 #        extract_software_packages(step)
 #        traverse(get_process_from_step(step))
