@@ -50,12 +50,12 @@ def get_process_from_step(step: cwl.WorkflowStep):
 
 
 def traverse_workflow(workflow: cwl.Workflow):
-    print('Workflow: \n')
+#    print('Workflow: \n')
     workflowname = os.path.basename(workflow.id)
-    print('Workflow id: ' + workflowname + '\n')
+    print('# Workflow: ' + workflowname + '\n')
 #    print(vars(workflow))
     extract_labels(workflow)
-    print('Steps: \n')
+    print('## Steps: \n')
     for step in workflow.steps:
 #         print(vars(step))
          stepname = step.id.split('#')[-1]

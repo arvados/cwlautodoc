@@ -1,12 +1,10 @@
-Workflow: 
-
-Workflow id: md5sum_label.cwl
+# Workflow: md5sum_label.cwl
 
 Label: Calculates an md5sum
 
 Doc: Longer label to describe how what this workflow does
 
-Steps: 
+## Steps: 
 
 Step ID: md5sum
 
