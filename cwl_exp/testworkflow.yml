@@ -1,0 +1,3 @@
+input_file:
+  class: File
+  path: /home/swz/autodoc/cwlautodoc/cwl_exp/input.txt
