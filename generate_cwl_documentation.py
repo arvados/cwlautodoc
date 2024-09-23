@@ -33,12 +33,12 @@ def generate_document_structure(cwl_file_path: str) -> dict:
         "label": getattr(cwl_doc, 'label', None),
         "description": getattr(cwl_doc, 'doc', "No description provided."),
         "authors": [author['s:name'] for author in cwl_doc['s:author']] if hasattr(cwl_doc, 's:author') else [],
-        "formats": cwl_doc['s:format'] if hasattr(cwl_doc, 's:format') else [],
+        "formats": ['s:format'] if hasattr(cwl_doc, 's:format') else [],
         "base_command": cwl_doc.baseCommand if isinstance(cwl_doc, CommandLineTool) and hasattr(cwl_doc, 'baseCommand') else None,
-        "inputs": [{"id": input.id, "type": extract_cwl_type(input), "description": getattr(input, 'doc', 'No description provided.')} for input in cwl_doc.inputs or []],
-        "outputs": [{"id": output.id, "type": extract_cwl_type(output), "description": getattr(output, 'doc', 'No description provided.')} for output in cwl_doc.outputs or []],
+        "inputs": [{"id": input.id, "type": getattr(input,'type_'), "description": getattr(input, 'doc', 'No description provided.')} for input in cwl_doc.inputs or []],
+        "outputs": [{"id": output.id, "type": getattr(output,'type_'), "description": getattr(output, 'doc', 'No description provided.')} for output in cwl_doc.outputs or []],
         "steps": [{"id": step.id, "run": step.run, "inputs": [input.id for input in step.in_], "outputs": step.out} for step in cwl_doc.steps or []] if isinstance(cwl_doc, Workflow) else [],
-        "requirements": [serialize_cwl_object(req) for req in cwl_doc.requirements or []],
+        "requirements": [dir(req) for req in cwl_doc.requirements or []],
         "hints": [serialize_cwl_object(hint) for hint in cwl_doc.hints or []]
     }
 
@@ -152,6 +152,7 @@ def main():
 
     # Generate the documentation structure
     doc_structure = generate_document_structure(args.cwl_file)
+    print(doc_structure)
 
     # Convert to the requested format
     if args.format == "markdown":
