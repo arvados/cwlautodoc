@@ -1,4 +1,4 @@
-cwlVersion: v1.2
+cwlVersion: v1.1
 class: CommandLineTool
 baseCommand: ["bash", "-c"]
 arguments: ["cat ${inputs.input_file} | tr a-z A-Z > output.txt"]

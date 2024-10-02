@@ -27,11 +27,15 @@ def extract_cwl_type(cwl_input):
 # Generate document structure from CWL file
 def generate_document_structure(cwl_file_path: str) -> dict:
     cwl_doc = load_document(cwl_file_path)
+    cwl_s = getattr(cwl_doc,'extension_fields','None')
+    print(cwl_s)
+    
 
     doc_structure = {
         "id": cwl_doc.id,
         "label": getattr(cwl_doc, 'label', None),
-        "description": getattr(cwl_doc, 'doc', "No description provided."),
+        "doc": getattr(cwl_doc,'doc',None),
+        "cwlversion": getattr(cwl_doc,'cwlVersion',None),
         "authors": [author['s:name'] for author in cwl_doc['s:author']] if hasattr(cwl_doc, 's:author') else [],
         "formats": ['s:format'] if hasattr(cwl_doc, 's:format') else [],
         "base_command": cwl_doc.baseCommand if isinstance(cwl_doc, CommandLineTool) and hasattr(cwl_doc, 'baseCommand') else None,

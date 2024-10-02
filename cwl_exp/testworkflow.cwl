@@ -1,4 +1,4 @@
-cwlVersion: v1.2
+cwlVersion: v1.1
 class: Workflow
 id: testworkflow
 label: Example Workflow
