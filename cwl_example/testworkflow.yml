@@ -1,0 +1,4 @@
+input_file:
+  class: File
+  format: edam:format_1964 
+  path: /home/swz/autodoc/cwlautodoc/cwl_example/input.txt
