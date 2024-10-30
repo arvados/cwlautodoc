@@ -6,3 +6,5 @@
 # CWL utils
 /cwl-utils/*
 
+# VS code 
+/.vscode/*

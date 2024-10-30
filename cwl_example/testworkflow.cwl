@@ -6,8 +6,11 @@ doc: A simple example workflow to demonstrate autodocumentation.
 
 s:author:
   - class: s:Person
-    s:name: "John Doe"
+    s:name: "John Doe" 
     s:email: "john.doe@example.com"
+  - class: s:Person
+    s:name: "Jane Doe"
+    s:email: "jane.doe@example.com"
 
 s:citation: https://dx.doi.org/
 s:dateCreated: "2023-10-02"

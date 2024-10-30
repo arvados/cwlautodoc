@@ -26,13 +26,48 @@ def extract_cwl_type(cwl_input):
             return ", ".join([extract_cwl_type(t) for t in cwl_type])
     return "N/A"
 
+def get_all_attributes(obj):
+    # Use vars() if obj has a __dict__ attribute
+    if hasattr(obj, '__dict__'):
+        attributes = vars(obj)
+    else:
+        # Otherwise, use dir() and get the attribute values using getattr()
+        attributes = {attr: getattr(obj, attr) for attr in dir(obj) if not attr.startswith('__')}
+    
+    return attributes
+
+# Function to clean up the main keys and interior field keys
+def clean_schema_dict(data):
+    cleaned_data = {}
+    
+    for key, value in data.items():
+        # Rename the main key using the last part of the URL
+        new_key = key.rsplit('/', 1)[-1]
+        
+        # Process nested dictionary or list values to remove "schema" prefixes in field names
+        if isinstance(value, list):
+            cleaned_value = [
+                {sub_key.split(':', 1)[-1]: sub_value for sub_key, sub_value in item.items()}
+                if isinstance(item, dict) else item
+                for item in value
+            ]
+        elif isinstance(value, dict):
+            cleaned_value = {sub_key.split(':', 1)[-1]: sub_value for sub_key, sub_value in value.items()}
+        else:
+            cleaned_value = value
+
+        # Assign the cleaned key and value to the new dictionary
+        cleaned_data[new_key] = cleaned_value
+
+    return cleaned_data
+
 
 # Generate document structure from CWL file
 def generate_document_structure(cwl_doc):
 
-    cwlType = type(cwl_doc)
+    extension_fields = (clean_schema_dict(cwl_doc.extension_fields))
 
-    if isinstance(cwlType, Workflow):
+    if isinstance(cwl_doc, Workflow):
         doc_structure = {
             "id": cwl_doc.id,
             "label": getattr(cwl_doc, "label", None),
@@ -127,6 +162,7 @@ def convert_to_markdown(doc_structure: dict) -> str:
 
     return doc_str
 
+
 # Main function for command-line interaction
 def main():
     parser = argparse.ArgumentParser(
@@ -157,7 +193,7 @@ def main():
     doc_structure = generate_document_structure(cwl_obj)
 
 
-#    print(doc_structure)
+    print(doc_structure)
 
 # Convert to the requested format
 # if args.format == "markdown":
